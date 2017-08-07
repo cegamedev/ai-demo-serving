@@ -41,7 +41,7 @@ images_test, labels_test = cifar10_input.inputs(eval_data=True,
 
 class CIFAR_CNN(object):
 
-    def __init__(self):
+    def __init__(self, reuseFg):
         self.image_holder = tf.placeholder(tf.float32, [batch_size, 24, 24, 3])
         self.label_holder = tf.placeholder(tf.int32, [batch_size])
 
@@ -97,7 +97,7 @@ class CIFAR_CNN(object):
         tf.add_to_collection('losses', cross_entropy_mean)
         return tf.add_n(tf.get_collection('losses'), name='total_loss')
 
-model = CIFAR_CNN()
+model = CIFAR_CNN(False)
 model.cost = model.loss(model.logits, model.label_holder)
 model.train_op = tf.train.AdamOptimizer(1e-3).minimize(model.cost)
 model.top_k_op = tf.nn.in_top_k(model.logits, model.label_holder, 1)
@@ -140,6 +140,9 @@ for step in range(max_steps):
 #     step += 1
 # precision = true_count / float(total_sample_count)
 # print('precision @ 1 = %.3f' % precision)
+
+batch_size = 1
+
 
 raise SystemExit
 # 导出模型
