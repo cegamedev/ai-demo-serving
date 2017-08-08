@@ -163,7 +163,7 @@ KEEPB = 1
 images_test, labels_test = cifar10_input.inputs(eval_data=True,
                                                 data_dir=data_dir, batch_size=batch_size)
 model = CIFAR_CNN(True)
-model.top_k_op = tf.nn.in_top_k(model.logits, model.label_holder, 5)
+model.top_k_op = tf.nn.in_top_k(model.logits, model.label_holder, 1)
 saver = tf.train.Saver()
 sess = tf.InteractiveSession()
 tf.global_variables_initializer().run()
