@@ -14,7 +14,7 @@ import numpy as np
 work_dir = '/tmp/cifar10_cnn/1'
 
 
-max_steps = 20000
+max_steps = 40000
 batch_size = 128
 # max_steps = 1a
 # batch_size = 1
